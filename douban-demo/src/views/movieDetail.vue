@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-        <h1>
+        <h1 style="text-align: left">
             {{movie_subject.title}}
             <span>({{movie_subject.year}})</span>
         </h1>
@@ -21,7 +21,7 @@
                                     <span v-if="index < movie_subject.directors.length - 1">/</span>
                                 </a>
                             </span>
-                            <br>
+                            <!-- <br> -->
                             <span class="worker">
                                 编剧:
                                 <a href="#" v-for="(writer, index) in movie_subject.writers">
@@ -29,7 +29,7 @@
                                     <span v-if="index < movie_subject.writers.length - 1">/</span>
                                 </a>
                             </span>
-                            <br>
+                            <!-- <br> -->
                             <span class="worker">
                                 主演:
                                 <a href="#" v-for="(cast, index) in movie_subject.casts">
@@ -37,7 +37,7 @@
                                     <span v-if="index < movie_subject.casts.length">/</span>
                                 </a>
                             </span>
-                            <br>
+                            <!-- <br> -->
                             <span class="worker">
                                 类型:
                                 <span v-for="(genre, index) in movie_subject.genres">
@@ -45,7 +45,7 @@
                                     <span v-if="index < movie_subject.genres.length - 1">/</span>
                                 </span>
                             </span>
-                            <br>
+                            <!-- <br> -->
                             <span class="worker">
                                 制片国家/地区:
                                 <span v-for="(countrie, index) in movie_subject.countries">
@@ -53,7 +53,7 @@
                                     <span v-if="index < movie_subject.countries.length - 1">/</span>
                                 </span>
                             </span>
-                            <br>
+                            <!-- <br> -->
                             <span class="worker">
                                 语言:
                                 <span v-for="(language, index) in movie_subject.languages">
@@ -61,7 +61,7 @@
                                     <span v-if="index < movie_subject.languages.count - 1">/</span>
                                 </span>
                             </span>
-                            <br>
+                            <!-- <br> -->
                             <span class="worker">
                                 上映日期:
                                 <span v-for="(pubdate, index) in movie_subject.pubdates">
@@ -69,7 +69,7 @@
                                     <span v-if="index < movie_subject.pubdates.length - 1">/</span>
                                 </span>
                             </span>
-                            <br>
+                            <!-- <br> -->
                             <span class="worker">
                                 片长:
                                 <span v-for="(duration, index) in movie_subject.durations">
@@ -77,7 +77,7 @@
                                     <span v-if="index < movie_subject.durations.length - 1">/</span>
                                 </span>
                             </span>
-                            <br>
+                            <!-- <br> -->
                             <span class="worker">
                                 又名:
                                 <span v-for="(akaname, index) in movie_subject.aka">
@@ -85,7 +85,7 @@
                                     <span v-if="index < movie_subject.aka.length - 1">/</span>
                                 </span>
                             </span>
-                            <br>
+                            <!-- <br> -->
                             <span class="worker">
                                 IMDb链接:
                                 <span>tt10627720</span>
@@ -93,7 +93,7 @@
                         </div>
                     </div>
                     <div class="rate-info">
-                        <p>豆瓣评分</p>
+                        <p style="text-align:left">豆瓣评分</p>
                         <div class="rate">
                             <h1>{{movie_subject.rating.average}}</h1>
                             <div class="star">
@@ -107,27 +107,27 @@
                         <div class="rating-wrap">
                             <div class="rate-level">
                                 <span class="rate-level-title">5星</span>
-                                <div class="rate-level-view"></div>
+                                <div class="rate-level-view" id="fiveStarDiv"></div>
                                 <span>{{fiveStarPercent}}%</span>
                             </div>
                             <div class="rate-level">
                                 <span class="rate-level-title">4星</span>
-                                <div class="rate-level-view"></div>
+                                <div class="rate-level-view" v-bind:style="{width:fourStarPercent + 'px'}"></div>
                                 <span >{{fourStarPercent}}%</span>
                             </div>
                             <div class="rate-level">
                                 <span class="rate-level-title">3星</span>
-                                <div class="rate-level-view"></div>
+                                <div class="rate-level-view" v-bind:style="{width:threeStarPercent + 'px'}"></div>
                                 <span >{{threeStarPercent}}% </span>
                             </div>
                             <div class="rate-level">
                                 <span class="rate-level-title">2星</span>
-                                <div class="rate-level-view"></div>
+                                <div class="rate-level-view" v-bind:style="{width:twoStarPercent + 'px'}"></div>
                                 <span >{{twoStarPercent}}% </span>
                             </div>
                             <div class="rate-level">
                                 <span class="rate-level-title">1星</span>
-                                <div class="rate-level-view"></div>
+                                <div class="rate-level-view" v-bind:style="{width:oneStarPercent + 'px'}"></div>
                                 <span >{{oneStarPercent}}% </span>
                             </div>
                         </div>
@@ -151,10 +151,10 @@
                 <br>
                 <div class="related-info">
                     <h2>{{movie_subject.title}}的剧情简介 · · · · · ·</h2>
-                    <span>{{movie_subject.summary}}</span>
+                    <p>{{movie_subject.summary}}</p>
                 </div>
                 <div class="celebrities">
-                    <h2>{{movie_subject.title}}的演职员 · · · · · ·</h2>
+                    <h2 style="text-align:left">{{movie_subject.title}}的演职员 · · · · · ·</h2>
                     <ul class="celebrities-list">
                         <li class="celebrity" v-for="n in 5">
                             <celebritieyCell></celebritieyCell>
@@ -162,7 +162,7 @@
                     </ul>
                 </div>
                 <div class="comments-section">
-                    <h2>{{movie_subject.title}}的短评 · · · · · · </h2>
+                    <h2 style="text-align:left">{{movie_subject.title}}的短评 · · · · · · </h2>
                     <div class="tab-hd">
                         <a id="hot-comment-tab">热门</a>
                         <a id="new-comment-tab">最新</a>
@@ -249,6 +249,10 @@ export default {
             this.twoStarPercent = (100 * newMovie_Subject.rating.details['2']/count).toFixed(2);
 
             this.oneStarPercent = (100 * newMovie_Subject.rating.details['1']/count).toFixed(2);
+
+            
+            console.log('fivestardiv ==' + document.getElementById('fiveStarDiv'));
+            document.getElementById('fiveStarDiv').style.width = this.fiveStarPercent + 'px';
         }
     },
 
@@ -299,12 +303,15 @@ export default {
 
 .info {
     max-width: 333px;
-    /* display: block; */
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
 }
 
 .worker {
     font-size: 13px;
     line-height: 150%;
+    text-align: left;
 }
 
 .rate-info {
@@ -355,14 +362,18 @@ export default {
     border-top: 1px solid #eaeaea;
     color: #9b9b9b;
     padding: 15px 0px;
+    text-align: left;
 }
 
 #interest_sect_level {
-
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
 }
 
 #interest_sect_level a {
-    padding: 0 7px;
+    padding: 7px 7px 0 7px;
     height: 24px;
     letter-spacing: 3px;
     margin: 0 10px 0 0;
@@ -384,11 +395,13 @@ a:visited{
 
 .related-info h2 {
     margin-bottom: 12px;
+    text-align: left;
 }
 
-.related-info span {
+.related-info p {
     word-break: break-all;
     font-size: 13px;
+    text-align: left;
 }
 
 .celebrities {
@@ -407,12 +420,13 @@ a:visited{
 
 .comments-section {
     margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
 }
 
 .tab-hd {
-
     margin-top: 10px;
-
 }
 
 .tab-bd{
