@@ -1,8 +1,8 @@
 <template>
     <div class="container">
         <h1>
-            title
-            <span>(2019)</span>
+            {{movie_subject.title}}
+            <span>({{movie_subject.year}})</span>
         </h1>
         <div class="article">
             <div class="indent">
@@ -10,53 +10,80 @@
                     <div class="subject">
                         <div id="mainpic">
                             <a class="nbgnbg">
-                                <img src="https://img3.doubanio.com\/view\/photo\/s_ratio_poster\/public\/p2563780504.webp" />
+                                <img :src="movie_subject.images.small" />
                             </a>
                         </div>
                         <div class="info">
                             <span class="worker">
                                 导演:
-                                <a href="#">饺子</a>
+                                <a href="#" v-for="(director, index) in movie_subject.directors">
+                                    {{director.name}}
+                                    <span v-if="index < movie_subject.directors.length - 1">/</span>
+                                </a>
                             </span>
                             <br>
                             <span class="worker">
                                 编剧:
-                                <a href="#">饺子</a>
+                                <a href="#" v-for="(writer, index) in movie_subject.writers">
+                                    {{writer.name}}
+                                    <span v-if="index < movie_subject.writers.length - 1">/</span>
+                                </a>
                             </span>
                             <br>
                             <span class="worker">
                                 主演:
-                                <a href="#">饺子</a>
+                                <a href="#" v-for="(cast, index) in movie_subject.casts">
+                                    {{cast.name}}
+                                    <span v-if="index < movie_subject.casts.length">/</span>
+                                </a>
                             </span>
                             <br>
                             <span class="worker">
                                 类型:
-                                <span>剧情 / 喜剧 / 动画 / 奇幻</span>
+                                <span v-for="(genre, index) in movie_subject.genres">
+                                    {{genre}}
+                                    <span v-if="index < movie_subject.genres.length - 1">/</span>
+                                </span>
                             </span>
                             <br>
                             <span class="worker">
                                 制片国家/地区:
-                                <span>中国大陆</span>
+                                <span v-for="(countrie, index) in movie_subject.countries">
+                                    {{countrie}}
+                                    <span v-if="index < movie_subject.countries.length - 1">/</span>
+                                </span>
                             </span>
                             <br>
                             <span class="worker">
                                 语言:
-                                <span>汉语普通话</span>
+                                <span v-for="(language, index) in movie_subject.languages">
+                                    {{language}}
+                                    <span v-if="index < movie_subject.languages.count - 1">/</span>
+                                </span>
                             </span>
                             <br>
                             <span class="worker">
                                 上映日期:
-                                <span>2019-07-26(中国大陆) / 2019-07-13(大规模点映)</span>
+                                <span v-for="(pubdate, index) in movie_subject.pubdates">
+                                    {{pubdate}}
+                                    <span v-if="index < movie_subject.pubdates.length - 1">/</span>
+                                </span>
                             </span>
                             <br>
                             <span class="worker">
                                 片长:
-                                <span>110分钟</span>
+                                <span v-for="(duration, index) in movie_subject.durations">
+                                    {{duration}}
+                                    <span v-if="index < movie_subject.durations.length - 1">/</span>
+                                </span>
                             </span>
                             <br>
                             <span class="worker">
                                 又名:
-                                <span>哪吒降世 / Ne Zha</span>
+                                <span v-for="(akaname, index) in movie_subject.aka">
+                                    {{akaname}}
+                                    <span v-if="index < movie_subject.aka.length - 1">/</span>
+                                </span>
                             </span>
                             <br>
                             <span class="worker">
@@ -68,11 +95,11 @@
                     <div class="rate-info">
                         <p>豆瓣评分</p>
                         <div class="rate">
-                            <h1>8.6</h1>
+                            <h1>{{movie_subject.rating.average}}</h1>
                             <div class="star">
-                                <star class="stars"></star>
+                                <star class="stars" :rating="movie_subject.rating"></star>
                                 <a>
-                                    417320
+                                    {{movie_subject.ratings_count}}
                                     <span class="ratecount">人评价</span>
                                 </a>
                             </div>
@@ -81,27 +108,27 @@
                             <div class="rate-level">
                                 <span class="rate-level-title">5星</span>
                                 <div class="rate-level-view"></div>
-                                <span >48.3% </span>
+                                <span>{{fiveStarPercent}}%</span>
                             </div>
                             <div class="rate-level">
                                 <span class="rate-level-title">4星</span>
                                 <div class="rate-level-view"></div>
-                                <span >48.3% </span>
+                                <span >{{fourStarPercent}}%</span>
                             </div>
                             <div class="rate-level">
                                 <span class="rate-level-title">3星</span>
                                 <div class="rate-level-view"></div>
-                                <span >48.3% </span>
+                                <span >{{threeStarPercent}}% </span>
                             </div>
                             <div class="rate-level">
                                 <span class="rate-level-title">2星</span>
                                 <div class="rate-level-view"></div>
-                                <span >48.3% </span>
+                                <span >{{twoStarPercent}}% </span>
                             </div>
                             <div class="rate-level">
                                 <span class="rate-level-title">1星</span>
                                 <div class="rate-level-view"></div>
-                                <span >48.3% </span>
+                                <span >{{oneStarPercent}}% </span>
                             </div>
                         </div>
                         <div class="rate-betterthan">
@@ -123,11 +150,11 @@
                 </div>
                 <br>
                 <div class="related-info">
-                    <h2>哪吒之魔童降世的剧情简介 · · · · · ·</h2>
-                    <span>　　天地灵气孕育出一颗能量巨大的混元珠，元始天尊将混元珠提炼成灵珠和魔丸，灵珠投胎为人，助周伐纣时可堪大用；而魔丸则会诞出魔王，为祸人间。元始天尊启动了天劫咒语，3年后天雷将会降临，摧毁魔丸。太乙受命将灵珠托生于陈塘关李靖家的儿子哪吒身上。然而阴差阳错，灵珠和魔丸竟然被掉包。本应是灵珠英雄的哪吒却成了混世大魔王。调皮捣蛋顽劣不堪的哪吒却徒有一颗做英雄的心。然而面对众人对魔丸的误解和即将来临的天雷的降临，哪吒是否命中注定会立地成魔？他将何去何从？</span>
+                    <h2>{{movie_subject.title}}的剧情简介 · · · · · ·</h2>
+                    <span>{{movie_subject.summary}}</span>
                 </div>
                 <div class="celebrities">
-                    <h2>哪吒之魔童降世的剧情简介 · · · · · ·</h2>
+                    <h2>{{movie_subject.title}}的演职员 · · · · · ·</h2>
                     <ul class="celebrities-list">
                         <li class="celebrity" v-for="n in 5">
                             <celebritieyCell></celebritieyCell>
@@ -135,14 +162,14 @@
                     </ul>
                 </div>
                 <div class="comments-section">
-                    <h2>哪吒之魔童降世的短评 · · · · · · </h2>
+                    <h2>{{movie_subject.title}}的短评 · · · · · · </h2>
                     <div class="tab-hd">
                         <a id="hot-comment-tab">热门</a>
                         <a id="new-comment-tab">最新</a>
                         <a id="follow-comment-tab">好友</a>
                     </div>
                     <div class="tab-bd">
-                        <shortComment v-for="n in 10"></shortComment>
+                        <shortComment v-for="comment in comments" :comment="comment"></shortComment>
                     </div>
                 </div>
             </div>
@@ -154,6 +181,7 @@
 import star from '../components/star'
 import celebritieyCell from '../components/celebritieyCell'
 import shortComment from '../components/shortComment'
+import {mapGetters, mapMutations, mapState, mapActions} from 'vuex'
 
 export default {
     name: 'movieDetail',
@@ -164,16 +192,72 @@ export default {
     },
 
     props: {
-        rate: {}
+
     },
 
     data () {
         return {
-
-
+            oneStarPercent: 0.0,
+            twoStarPercent: 0.0,
+            threeStarPercent: 0.0,
+            fourStarPercent: 0.0,
+            fiveStarPercent: 0.0,
         }
     },
 
+    mounted () {
+        console.log('mouted---');
+        this.movieSubjectById(this.$route.params.movieId);
+        this.movieCommentsById(this.$route.params.movieId);
+    },
+
+    computed: {
+        ...mapState({
+            movie_subject: state => state.movieDetail.movie_subject,
+            comments: state => state.movieDetail.comments,
+        }),
+
+        fourStarPercent: function () {
+            return 
+        },
+        threeStarPercent: function () {
+            return (this.movie_subject.rating.details['3']/this.movie_subject.ratings_count).toFiexed(2)
+        },
+        twoStarPercent: function () {
+            return (this.movie_subject.rating.details['2']/this.movie_subject.ratings_count).toFiexed(2)
+        },
+        oneStarPercent: function () {
+            return (this.movie_subject.rating.details['1']/this.movie_subject.ratings_count).toFiexed(2)
+        },
+    },
+
+    watch: {
+        movie_subject: function (newMovie_Subject) {
+            console.log('watch;--' + newMovie_Subject.ratings_count);
+            var count = newMovie_Subject.rating.details['5'];
+            count += newMovie_Subject.rating.details['4']
+            count += newMovie_Subject.rating.details['3']
+            count += newMovie_Subject.rating.details['2']
+            count += newMovie_Subject.rating.details['1']
+
+            this.fiveStarPercent = (100 * newMovie_Subject.rating.details['5']/count).toFixed(2);
+
+            this.fourStarPercent = (100 * newMovie_Subject.rating.details['4']/count).toFixed(2);
+
+            this.threeStarPercent = (100 * newMovie_Subject.rating.details['3']/count).toFixed(2);
+
+            this.twoStarPercent = (100 * newMovie_Subject.rating.details['2']/count).toFixed(2);
+
+            this.oneStarPercent = (100 * newMovie_Subject.rating.details['1']/count).toFixed(2);
+        }
+    },
+
+    methods: {
+        ...mapActions([
+            'movieSubjectById',
+            'movieCommentsById',
+        ])
+    },
 }
 </script>
 

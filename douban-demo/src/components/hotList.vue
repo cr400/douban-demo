@@ -1,8 +1,10 @@
 <template>
     <div>
         <ul class="list">
-            <li class="item" v-for="item in items" @click="toDetail()">
-                <movieCell :item="item"></movieCell>
+            <li class="item" v-for="item in items">
+                <router-link :to="{name:'movieDetail', params:{movieId:item.id}}">
+                    <movieCell :item="item"></movieCell>
+                </router-link>
             </li>
         </ul>
     </div>
@@ -16,7 +18,7 @@ export default {
         movieCell
     },
     props: {
-        items: [],
+        items: {},
     },
     data () {
         return {
@@ -24,20 +26,12 @@ export default {
         }
     },
 
-    mounted () {
-        console.log('mouted---');
-        console.log(this.$router)  
-    },
-
-    created () {
-        console.log('created---');
-        console.log(this.$router)
-    },
-
     methods: {
         toDetail: function () {
-            this.$router.push({path:'/movieDetail'})
-            console.log('toDetail')
+            console.log('toDetail' + this.$route.path)
+            // this.$router.push({path:'/movieDetail?movieId=123'})
+            this.$router.push({name:'movieDetail', params: {movieId: 123}})
+            console.log('toDetail' + this.$route.path)
         }
     }
 }

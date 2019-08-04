@@ -32,17 +32,19 @@ export default {
     },
 
     mounted () {
-        console.log('mounted')
-        if (self.rating != null) {
+        var rate = 0;
+        if (this.rating.average != null) {
             this.average = this.rating.average;
-            console.log('assign -')
+            console.log('star beforeUpdate' + this.average)
+            rate = parseInt(this.average/2);
         }
-
-        let rate = parseInt(this.average/2);
+        else if (this.rating.value != null) {
+            rate = this.rating.value;
+        }
+        
         this.full = rate;
         this.half = (this.average % 2) > 0 ? 1 : 0;
         this.gray = 5 - this.full - this.half;
-        console.log('average:' + this.full + " " + this.half + " " + this.gray);
     },
 }
 

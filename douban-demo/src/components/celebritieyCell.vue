@@ -13,6 +13,9 @@
 <script>
 export default {
     name: 'celebritieyCell',
+    props: {
+        
+    },
 }
 
 </script>

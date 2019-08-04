@@ -66,6 +66,7 @@ export default {
             method:'get',
             url:url,
             timeout: 30000,
+            referer:'https://movie.douban.com',
             params,
         }).then(checkStatus).then(checkCode)
     },
